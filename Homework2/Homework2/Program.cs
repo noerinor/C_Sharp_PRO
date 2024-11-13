@@ -7,6 +7,7 @@ namespace Homework2
     {
         static void Main()
         {
+            Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine("____________");
             Console.WriteLine("ЗАДАЧА 1");
             Console.WriteLine("____________");
@@ -38,8 +39,8 @@ namespace Homework2
             Console.WriteLine("ЗАДАЧА 2");
             Console.WriteLine("____________");
 
-            string text = "This is a sample text with some bad words.";
-            string[] forbiddenWords = { "bad", "words" };
+            string text = "Це текст, який містить заборонені слова: Заборонене слово.";
+            string[] forbiddenWords = { "Заборонене", "слово" };
             string filteredText = Filter(text, forbiddenWords);
             Console.WriteLine(filteredText);
 
@@ -63,9 +64,9 @@ namespace Homework2
             Console.WriteLine("ЗАДАЧА 3");
             Console.WriteLine("____________");
 
-            int length = 10; // Длина строки
+            int length = 10;
             string randomString = Generate(length);
-            Console.WriteLine(randomString); // Вывод: случайная строка из 10 символов
+            Console.WriteLine(randomString);
 
 
             static string Generate(int length)
