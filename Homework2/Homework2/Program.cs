@@ -68,6 +68,7 @@ namespace Homework2
             string randomString = Generate(length);
             Console.WriteLine(randomString);
 
+            TaskFour();
 
             static string Generate(int length)
             {
@@ -83,8 +84,98 @@ namespace Homework2
                 return result.ToString();
             }
         }
+
+        public static string CompressDNA(string dna)
+        {
+            if (string.IsNullOrEmpty(dna))
+                return "";
+
+            StringBuilder compressed = new StringBuilder();
+            char currentChar = dna[0];
+            int count = 1;
+
+            for (int i = 1; i < dna.Length; i++)
+            {
+                if (dna[i] == currentChar)
+                {
+                    count++;
+                }
+                else
+                {
+                    compressed.Append(currentChar);
+                    compressed.Append(count);
+                    currentChar = dna[i];
+                    count = 1;
+                }
+            }
+
+
+            compressed.Append(currentChar);
+            compressed.Append(count);
+
+            return compressed.ToString();
+        }
+
+
+        public static string DecompressDNA(string compressedDna)
+        {
+            if (string.IsNullOrEmpty(compressedDna))
+                return "";
+
+            StringBuilder decompressed = new StringBuilder();
+            for (int i = 0; i < compressedDna.Length; i += 2)
+            {
+                char nucleotide = compressedDna[i];
+                int count = int.Parse(compressedDna[i + 1].ToString());
+
+                decompressed.Append(new string(nucleotide, count));
+            }
+
+            return decompressed.ToString();
+        }
+
+
+        static void TaskFour()
+        {
+
+            Console.WriteLine("____________");
+            Console.WriteLine("ЗАДАЧА 5");
+            Console.WriteLine("____________");
+
+            while (true)
+            {
+                Console.WriteLine("\nВиберіть дію:");
+                Console.WriteLine("1 - Зжати ДНК");
+                Console.WriteLine("2 - Розжати ДНК");
+                Console.WriteLine("0 - Вихід");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.Write("Введіть цепочку ДНК: ");
+                        string dna = Console.ReadLine();
+                        string compressed = CompressDNA(dna);
+                        Console.WriteLine($"Зжата ДНК: {compressed}");
+                        break;
+
+                    case "2":
+                        Console.Write("Ведіть зжату ДНК: ");
+                        string compressedDna = Console.ReadLine();
+                        string decompressed = DecompressDNA(compressedDna);
+                        Console.WriteLine($"Розпакована ДНК: {decompressed}");
+                        break;
+
+                    case "0":
+                        Console.WriteLine("Вийти.");
+                        return;
+
+                    default:
+                        Console.WriteLine("Помилка вводу.");
+                        break;
+                }
+            }
+        }
     }
 }
-
-
-
